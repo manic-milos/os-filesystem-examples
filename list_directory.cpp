@@ -21,8 +21,15 @@ void list_dir(fs::path putanja,string dubina=""){
     }
 }
 
-int main(){
-    fs::path putanja=".";//pocetna putanja. "." znaci trenutni folder
+int main(int argc, char* argv[])
+{
+    if(argc==1){
+        throw std::invalid_argument("Poziv ne sadrzi putanju, pravilno koriscenje je <ime fajla> <putanja koja se lista>");
+    }
+    fs::path putanja=argv[1];//pocetna putanja. "." znaci trenutni folder
+    if(!fs::exists(putanja)){
+        throw std::invalid_argument("Putanja ne postoji");
+    }
     list_dir(putanja);// pocetni poziv funkcije
     return 0;
 }
